@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sine Waves</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript">
+	
+	
+	//Function executes after DOM is ready
+	$(document).ready(function() {
+		//Assign the canvas element  to a variable
+		var canvas = document.getElementById("myCanvas");
+		//Assign the 2d rendering context to a variable THREE TIMES
+		var context = canvas.getContext("2d");
+		var context1 = canvas.getContext("2d");
+		var context2 = canvas.getContext("2d");
+		
+		//Global variables
+		var canvasWidth = canvas.width;
+		var canvasHeight = canvas.height;
+		var t = 0;
+		var xPos = 0;
+		var yPos = canvasHeight/2;
+		var yPos1 = canvasHeight/2;
+		var yPos2 = canvasHeight/2;
+		var centreX = canvasWidth/2;
+		var centreY = canvasHeight/2;	
+		var range = 50;
+		var xSpeed = 2;
+	
+		
+		//sets up animation loop
+		function animate () {
+			//Starts canvas animation
+			window.requestAnimationFrame(animate, canvas);
+			
+			xPos = xPos + xSpeed;
+			t = t + 1;
+			
+			//Curve1
+			context.beginPath();
+			context.moveTo(xPos, yPos);
+			yPos = range*Math.sin(t*Math.PI/180) + centreY;
+			//Curve 1 draw line
+			context.lineTo(xPos, yPos);
+			context.stroke();
+			context.strokeStyle = "red";
+			context.lineWidth = 7;
+			context.closePath;
+			
+			//Curve2
+			context1.beginPath();
+			context1.moveTo(xPos, yPos1);		
+			yPos1 = range*Math.sin(2*(t*Math.PI/180)) + centreY;
+			//Curve 2 draw line
+			context1.lineTo(xPos, yPos1);
+			context1.stroke();
+			context1.strokeStyle = "blue";
+			context.lineWidth = 7;
+			context1.closePath;
+			
+			//Curve3
+			context2.beginPath();
+			context2.moveTo(xPos, yPos2);
+			yPos2 = range*Math.sin(4*(t*Math.PI/180)) + centreY;
+			//Curve 3 draw line
+			context2.lineTo(xPos, yPos2);
+			context2.stroke();
+			context2.strokeStyle = "green";
+			context.lineWidth = 7;
+			context2.closePath;
+		};
+		//call it once to kick it off 
+		//after that it recursively calls itself
+		window.requestAnimationFrame(animate, canvas);
+    });
+		</script>
+	</head>  
+ <body>
+ 
+  <canvas id="myCanvas" width="800" height="500"
+   style="border:1px solid #000000;">
+  </canvas>
+  </body>
+</html>
